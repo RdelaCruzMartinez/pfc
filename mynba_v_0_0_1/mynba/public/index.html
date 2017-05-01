@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <!--Bootstrap mobile first -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Index</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100" rel="stylesheet">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+</head>
+
+<body>
+
+<div class="container-fluid" id="app">
+
+    <div class="header clearfix">
+        <nav>
+            <ul class="nav nav-pills pull-right">
+                <li role="presentation" class="active"><a href="#">Home</a></li>
+                <li role="presentation"><a href="#">About</a></li>
+                <li role="presentation"><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <h3 class="text-muted">MyNBA</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+                <!--indicators dot nav -->
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                    <li data-target="#myCarousel" data-slide-to="2"></li>
+                </ol>
+
+                <!-- wrapper for slides -->
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="./images/rubio1.jpg" alt="ricky_rubio1"/>
+                        <div class="carousel-caption">
+                            <h1>PARGELUM 1</h1>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="./images/rubio2.jpg" alt="ricky_rubio2"/>
+                        <div class="carousel-caption">
+                            <h1>PARGELUM 2</h1>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <img src="./images/rubio3.jpg" alt="ricky_rubio3"/>
+                        <div class="carousel-caption">
+                            <h1>PARGELUM 3</h1>
+                        </div>
+                    </div>
+                </div>
+                <!-- Controls or next and prev buttons -->
+            </div>
+        </div>
+    </div>
+
+    <div id="teamChoicePanel" class="col-md-6 col-md-offset-3">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form name="teamForm">
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label>Conferencia:</label>
+                            <br>
+                            <select name="selectConference" id="selectConference" v-model="conference">
+                                <option value="">Selecciona una conferencia</option>
+                                <option value="east">Este</option>
+                                <option value="west">Oeste</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-6">
+                            <label>Selecciona un equipo:</label>
+                            <br>
+                            <select v-if="conference === 'east'">
+                                <option v-for="team in eastTeams" v-bind:value="team.abbreviation">
+                                    {{team.name}}
+                                </option>
+                            </select>
+                            <select v-if="conference === 'west'">
+                                <option v-for="team in westTeams" v-bind:value="team.abbreviation">
+                                    {{team.name}}
+                                </option>
+                            </select>
+                         </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <h1>Cuadro playoff</h1>
+                </div>
+            </div>
+         </div>
+    </div>
+
+</div> <!-- /container -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/vue"></script>
+<script src="javascripts/controller.js"></script>
+</body>
+</html>
