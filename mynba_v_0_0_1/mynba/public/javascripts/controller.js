@@ -3,6 +3,7 @@ new Vue({
     data: {
         conference: '',
         imgURI: '',
+        departure: '',
         westTeams: [
             {name:'Golden State Warriors', abbreviation: 'GSW', logo: './images/teams/west/warriors.png'},
             {name:'Los Angeles Lakers', abbreviation: 'LAL', logo: './images/teams/west/lakers.png'},

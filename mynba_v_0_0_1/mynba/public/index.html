@@ -72,12 +72,12 @@
     <div id="teamChoicePanel" class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
             <div class="panel-body">
-                <form name="teamForm">
+                <form name="teamForm" action="/submmit" method="post">
                     <div class="row form-group">
                         <div class="col-sm-6">
                             <label>Conferencia:</label>
                             <br>
-                            <select name="selectConference" id="selectConference" v-model="conference">
+                            <select name="selectConference" id="selectConference" v-model="conference" required>
                                 <option value="">Selecciona una conferencia</option>
                                 <option value="east">Este</option>
                                 <option value="west">Oeste</option>
@@ -88,12 +88,12 @@
                         <div class="col-sm-6">
                             <label>Selecciona un equipo:</label>
                             <br>
-                            <select v-if="conference === 'east'">
+                            <select v-if="conference === 'east'" name="team" required>
                                 <option v-for="team in eastTeams" v-bind:value="team.abbreviation">
                                     {{team.name}}
                                 </option>
                             </select>
-                            <select v-if="conference === 'west'">
+                            <select v-if="conference === 'west'" name="team" required>
                                 <option v-for="team in westTeams" v-bind:value="team.abbreviation">
                                     {{team.name}}
                                 </option>
@@ -102,8 +102,14 @@
                     </div>
                     <div class="row form-group">
                         <div class="col-sm-6">
-                            <input id="fecIni" type="date">
-                            <input id="fecFin" type="date">
+                            <label>Fecha de Ida:</label>
+                            <br/>
+                            <input id="fecIni" name="fecIni" type="date" v-model="departure" required>
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Fecha de vuelta:</label>
+                            <br/>
+                            <input id="fecFin" name="fecFin" type="date" required>
                         </div>
                     </div>
                     <div class="row from-group">
@@ -133,7 +139,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Vue framework -->
 <script src="https://unpkg.com/vue"></script>
+<!-- Vue-validation -->
+<!--<script src="https://cdn.jsdelivr.net/vee-validate/2.0.0-rc.3/vee-validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/vee-validate/2.0.0-rc.3/vee-validate.js"></script>-->
+<!-- custom js files -->
 <script src="javascripts/controller.js"></script>
 </body>
 </html>
