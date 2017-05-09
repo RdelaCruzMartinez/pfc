@@ -1,5 +1,4 @@
 var express = require('express');
-var test = require('./../testRecibirData');
 var fs = require('fs'); //modulo de node para importar archivos.
 var router = express.Router();
 
