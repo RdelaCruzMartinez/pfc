@@ -64,4 +64,20 @@ $(function () {
     $("#datetimepicker2").on("dp.change", function (e) {
         $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
     });
+
+    $('#teamForm').on('submit', function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: $(this).attr('action') || window.location.pathname,
+            type: "POST",
+            data: $(this).serialize(),
+            success: function (data) {
+                //TODO
+            },
+            error: function (data) {
+                alert(data);
+            }
+        })
+    })
+
 });

@@ -21,7 +21,7 @@ router.post('/submmit', function (req, res) {
   console.log("req.body.team => " + req.body.team);
   console.log("fecIni => " + req.body.fecIni);
   console.log("fecFin => " + req.body.fecFin);
-  if(req.body.fecIni > req.body.fecFin) {
+  if(req.body.fecIni < req.body.fecFin) {
     res.redirect('/');
   } else {
     res.writeHead(500);
