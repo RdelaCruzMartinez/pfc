@@ -17,7 +17,7 @@ router.get('/', function(request, response, next){
   });
 });
 
-router.post('/submmit', function (req, res) {
+/*router.post('/submmit', function (req, res) {
   console.log("req.body.team => " + req.body.team);
   console.log("fecIni => " + req.body.fecIni);
   console.log("fecFin => " + req.body.fecFin);
@@ -26,6 +26,17 @@ router.post('/submmit', function (req, res) {
   } else {
     res.writeHead(500);
     res.write('Bad Request');
+  }
+  res.end()
+});*/
+
+router.post('/submmit', function (req, res) {
+  if(req.body.fecIni < req.body.fecFin) {
+    var string = "HOLA MUNDO";
+    res.writeHead(200, {"Content-Type": "text/plain"});
+    res.end(string)
+  } else {
+    res.writeHead(500);
   }
   res.end()
 });

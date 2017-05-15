@@ -72,10 +72,10 @@ $(function () {
             type: "POST",
             data: $(this).serialize(),
             success: function (data) {
-                //TODO
+                document.getElementById("test").innerText = data;
             },
             error: function (data) {
-                alert(data);
+                alert("Bad Request");
             }
         })
     })
