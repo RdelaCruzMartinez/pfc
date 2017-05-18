@@ -32,6 +32,7 @@ router.get('/', function(request, response, next){
 
 router.post('/submmit', function (req, res) {
   if(req.body.fecIni < req.body.fecFin) {
+    console.log("req.body.team => " + req.body.team);
     var string = "HOLA MUNDO";
     res.writeHead(200, {"Content-Type": "text/plain"});
     res.end(string)

@@ -74,7 +74,7 @@
     <div id="teamChoicePanel" class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
             <div class="panel-body">
-                <form id="teamForm" name="teamForm" action="/submmit" method="post">
+                <form id="teamForm" name="teamForm" action="/submmit" method="post" v-on:submit.prevent>
                     <div class="row form-group">
                         <div class="col-sm-6">
                             <label>Conferencia:</label>
@@ -87,19 +87,33 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-sm-6">
+                        <div class="col-sm-12">
                             <label>Selecciona un equipo:</label>
                             <br>
-                            <select v-if="conference === 'east'" name="team" required>
-                                <option v-for="team in eastTeams" v-bind:value="team.abbreviation">
-                                    {{team.name}}
-                                </option>
-                            </select>
-                            <select v-if="conference === 'west'" name="team" required>
-                                <option v-for="team in westTeams" v-bind:value="team.abbreviation">
-                                    {{team.name}}
-                                </option>
-                            </select>
+                            <div v-if="conference === 'east'">
+                                <div class="col-sm-6">
+                                    <select id="eastTeams"  name="team" v-on:click="updateImage('eastTeams')" required>
+                                        <option class="teamName" v-for="team in eastTeams" v-bind:value="team.abbreviation">
+                                            {{team.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img id="eastLogo" name="teamLogo" class="teamLogo" src="" alt="Team-logo">
+                                </div>
+                            </div>
+                            <div v-if="conference === 'west'" >
+                                <div class="col-sm-6">
+                                    <select id="westTeams" name="team" v-on:click="updateImage('westTeams')"  required>
+                                        <option class="teamName" v-for="team in westTeams" v-bind:value="team.abbreviation">
+                                            {{team.name}}
+                                        </option>
+                                     </select>
+                                 </div>
+                                <div class="col-sm-6">
+                                    <img id="westLogo" name="teamLogo" class="teamLogo" src="" alt="Team-logo">
+                                </div>
+                            </div>
                          </div>
                     </div>
                     <div class="row form-group">
@@ -130,6 +144,7 @@
                         <div class="col-sm-12">
                             <button type="submit" class="btn btn-primary" value="send">Enviar</button>
                             <button type="reset" class="btn btn-primary">Limpiar</button>
+                            <button type="button" class="btn btn-danger" v-on:click="updateImage">Test</button>
                         </div>
                     </div>
                 </form>

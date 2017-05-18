@@ -2,7 +2,7 @@ new Vue({
     el: '#app',
     data: {
         conference: '',
-        imgURI: '',
+        optionTeam: '',
         departure: '',
         westTeams: [
             {name:'Golden State Warriors', abbreviation: 'GSW', logo: './images/teams/west/warriors.png'},
@@ -10,7 +10,7 @@ new Vue({
             {name:'Oklahoma City Thunder', abbreviation: 'OKC', logo: './images/teams/west/okc.png'},
             {name:'San Antonio Spurs', abbreviation: 'SAS', logo: './images/teams/west/spurs.png'},
             {name:'Los Angeles Clippers', abbreviation: 'LAC', logo: './images/teams/west/clipers.png'},
-            {name:'Houston Rockets', abbreviation: 'HOU', logo: './images/teams/west/rokets.png'},
+            {name:'Houston Rockets', abbreviation: 'HOU', logo: './images/teams/west/rockets.png'},
             {name:'Portland Trail Blazers', abbreviation: 'POR', logo: './images/teams/west/portland.png'},
             {name:'Dallas Mavericks', abbreviation: 'DAL', logo: './images/teams/west/dallas.png'},
             {name:'Memphis Grizzlies', abbreviation: 'MEM', logo: './images/teams/west/menphis.png'},
@@ -40,10 +40,34 @@ new Vue({
         ]
     },
     methods: {
-        updateImage(data){
-            console.log(data);
-        },
-        conferencePicker(){
+        updateImage: function(zone) {
+            //document.getElementsByName("teamLogo").setAttribute("src");
+            console.log(zone);
+/*            document.getElementsByName("teamLogo").className = " ";
+            document.getElementsByName("teamLogo").className = "visible";*/
+
+            var select = document.getElementById(zone);
+            var value = select.options[select.selectedIndex].value;
+            console.log("value => " + value);
+            if (zone == "eastTeams") {
+                for (var i = 0; i < this.eastTeams.length; i++) {
+                    if(this.eastTeams[i].abbreviation == value) {
+                       var imgEast = document.getElementById("eastLogo");
+                        imgEast.setAttribute("src", " ");
+                        imgEast.setAttribute("src", this.eastTeams[i].logo);
+                        break;
+                    }
+                }
+            } else if(zone == "westTeams") {
+                for (var ii = 0; ii < this.westTeams.length; ii++) {
+                    if(this.westTeams[ii].abbreviation == value) {
+                        var imgWest = document.getElementById("westLogo");
+                        imgWest.setAttribute("src", " ");
+                        imgWest.setAttribute("src", this.westTeams[ii].logo);
+                        break;
+                    }
+                }
+            }
 
         }
 
@@ -66,7 +90,7 @@ $(function () {
     });
 
     $('#teamForm').on('submit', function (e) {
-        e.preventDefault();
+        //e.preventDefault();
         $.ajax({
             url: $(this).attr('action') || window.location.pathname,
             type: "POST",

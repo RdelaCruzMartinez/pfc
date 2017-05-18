@@ -12,6 +12,12 @@ a {
   margin: 0 auto;
 }
 
+.teamLogo {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+}
+
 #myCarousel {
   margin-bottom: 5%;
 }
