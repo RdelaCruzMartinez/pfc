@@ -89,7 +89,6 @@
                     <div class="row form-group">
                         <div class="col-sm-12">
                             <label>Selecciona un equipo:</label>
-                            <br>
                             <div v-if="conference === 'east'">
                                 <div class="col-sm-6">
                                     <select id="eastTeams"  name="team" v-on:click="updateImage('eastTeams')" required>
@@ -120,7 +119,23 @@
                         <div class="col-sm-3">
                             <label>Origen:</label>
                             <br>
-                            <input type="text" maxlength="3" value="PMI" name="origin" required>
+                            <select name="origin" required>
+                                <option value="BCN">Barcelona</option>
+                                <option value="BIO">Bilbao</option>
+                                <option value="RJL">Logroño</option>
+                                <option value="MAD">Madrid</option>
+                                <option value="MID">Merida</option>
+                                <option value="MJV">Murcia</option>
+                                <option value="OVD">Oviedo</option>
+                                <option value="PMI" selected>Palma de Mallorca</option>
+                                <option value="PNA">Pamplona</option>
+                                <option value="SDR">Santander</option>
+                                <option value="SCQ">Santiago de Compostela</option>
+                                <option value="SVQ">Sevilla</option>
+                                <option value="VLC">Valencia</option>
+                                <option value="VLL">Valladolid</option>
+                                <option value="ZAZ">Zaragoza</option>
+                            </select>
                         </div>
                         <div class="col-sm-3">
                             <label>Nº Pasajeros</label>

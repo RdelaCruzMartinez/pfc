@@ -1,5 +1,6 @@
 var express = require('express');
 var fs = require('fs'); //modulo de node para importar archivos.
+var flightEngine = require('../controllers/flights/google_qpx_client');
 var router = express.Router();
 
 /* GET home page. */
@@ -32,9 +33,8 @@ router.get('/', function(request, response, next){
 
 router.post('/submmit', function (req, res) {
   if(req.body.fecIni < req.body.fecFin) {
-    console.log("req.body.team => " + req.body.team);
-    console.log("req.body.origin => " + req.body.origin);
-    console.log("req.body.passengers => " + req.body.passengers);
+    flightEngine.findFligthsProcess(req);
+
     var string = "HOLA MUNDO";
     res.writeHead(200, {"Content-Type": "text/plain"});
     res.end(string)
