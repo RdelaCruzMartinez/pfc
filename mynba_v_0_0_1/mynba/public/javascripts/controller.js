@@ -71,10 +71,13 @@ new Vue({
 });
 
 $(function () {
-    $('#datetimepicker1').datetimepicker();
+    $('#datetimepicker1').datetimepicker({
+        format: 'YYYY/MM/DD'
+    });
 
     $('#datetimepicker2').datetimepicker({
-        useCurrent: false
+        useCurrent: false,
+        format: 'YYYY/MM/DD'
     });
 
     $("#datetimepicker1").on("dp.change", function (e) {
