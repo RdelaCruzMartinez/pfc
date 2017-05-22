@@ -41,11 +41,7 @@ new Vue({
     },
     methods: {
         updateImage: function(zone) {
-            //document.getElementsByName("teamLogo").setAttribute("src");
             console.log(zone);
-/*            document.getElementsByName("teamLogo").className = " ";
-            document.getElementsByName("teamLogo").className = "visible";*/
-
             var select = document.getElementById(zone);
             var value = select.options[select.selectedIndex].value;
             console.log("value => " + value);
