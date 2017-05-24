@@ -68,6 +68,10 @@ new Vue({
                 }
             }
 
+        },
+        clear: function () {
+            var img = document.getElementsByName("teamLogo");
+            img[0].setAttribute("src", "");
         }
     }
 });
