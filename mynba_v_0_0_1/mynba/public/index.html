@@ -98,7 +98,7 @@
                                             v-model="team" required>
                                         <option value="">¿Que equipo te gustaria ver?</option>
                                         <option class="teamName" v-for="team in eastTeams"
-                                                v-bind:value="team.abbreviation">
+                                                v-bind:value="team.iata">
                                             {{team.name}}
                                         </option>
                                     </select>
@@ -113,7 +113,7 @@
                                             v-model="team" required>
                                         <option value="">¿Que equipo te gustaria ver?</option>
                                         <option class="teamName" v-for="team in westTeams"
-                                                v-bind:value="team.abbreviation">
+                                                v-bind:value="team.iata">
                                             {{team.name}}
                                         </option>
                                     </select>
