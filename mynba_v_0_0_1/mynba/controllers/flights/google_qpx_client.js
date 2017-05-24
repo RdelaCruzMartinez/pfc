@@ -5,7 +5,9 @@ module.exports =  {
         console.log("req.body.passengers => " + req.body.passengers);
         console.log("req.body.fecIni => " + req.body.fecIni);
         console.log("req.body.fecFin => " + req.body.fecFin);
-        //var json = this.buildRequest(req);
+        var json = this.buildRequest(req);
+        console.log("build request json = " + json);
+        return json;
         //this.makeRequest(json);
     },
     buildRequest: function (req) {
@@ -24,11 +26,9 @@ module.exports =  {
                     destination: req.body.origin,
                     date: req.body.fecFin
                 }],
-                solutions: 4
+                solutions: 2
             }
-        }
-    },
-    makeRequest: function (json) {
-        //TODO
+        };
+        return JSON.stringify(postRequest);
     }
 };

@@ -10,11 +10,14 @@
 
     <title>MyNBA</title>
     <!-- Bootstrap Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <!--Datepicker -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/css/bootstrap-datetimepicker.min.css">
     <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!--Personal styles -->
     <link rel="stylesheet" href="./stylesheets/style.css">
 </head>
@@ -91,8 +94,11 @@
                             <label>Selecciona un equipo:</label>
                             <div v-if="conference === 'east'">
                                 <div class="col-sm-6">
-                                    <select id="eastTeams"  name="team" v-on:click="updateImage('eastTeams')" required>
-                                        <option class="teamName" v-for="team in eastTeams" v-bind:value="team.abbreviation">
+                                    <select id="eastTeams" name="team" v-on:click="updateImage('eastTeams')"
+                                            v-model="team" required>
+                                        <option value="">¿Que equipo te gustaria ver?</option>
+                                        <option class="teamName" v-for="team in eastTeams"
+                                                v-bind:value="team.abbreviation">
                                             {{team.name}}
                                         </option>
                                     </select>
@@ -101,25 +107,29 @@
                                     <img id="eastLogo" name="teamLogo" class="teamLogo" src="">
                                 </div>
                             </div>
-                            <div v-if="conference === 'west'" >
+                            <div v-if="conference === 'west'">
                                 <div class="col-sm-6">
-                                    <select id="westTeams" name="team" v-on:click="updateImage('westTeams')"  required>
-                                        <option class="teamName" v-for="team in westTeams" v-bind:value="team.abbreviation">
+                                    <select id="westTeams" name="team" v-on:click="updateImage('westTeams')"
+                                            v-model="team" required>
+                                        <option value="">¿Que equipo te gustaria ver?</option>
+                                        <option class="teamName" v-for="team in westTeams"
+                                                v-bind:value="team.abbreviation">
                                             {{team.name}}
                                         </option>
-                                     </select>
-                                 </div>
+                                    </select>
+                                </div>
                                 <div class="col-sm-6">
                                     <img id="westLogo" name="teamLogo" class="teamLogo" src="">
                                 </div>
                             </div>
-                         </div>
+                        </div>
                     </div>
                     <div class="row form-group">
                         <div class="col-sm-3">
                             <label>Origen:</label>
                             <br>
-                            <select name="origin" required>
+                            <select name="origin" v-model="origin" required>
+                                <option value="">¿Desde donde puedes viajar?</option>
                                 <option value="BCN">Barcelona</option>
                                 <option value="BIO">Bilbao</option>
                                 <option value="RJL">Logroño</option>
@@ -140,7 +150,8 @@
                         <div class="col-sm-3">
                             <label>Nº Pasajeros</label>
                             <br>
-                            <select name="passengers" required>>
+                            <select name="passengers" v-model="passengers" required>>
+                                <option value="">¿Cuantos sereis?</option>
                                 <option value="1" selected>1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -155,18 +166,18 @@
                             <br/>
                             <div class="form-group">
                                 <div class='input-group date' id='datetimepicker1'>
-                                    <input id="fecIni" name="fecIni" type='text' class="form-control" required/>
+                                    <input id="fecIni" name="fecIni" type='text' class="form-control" v-model="departure" required/>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
-                         </div>
+                        </div>
                         <div class="col-sm-6">
                             <label>Fecha de vuelta:</label>
                             <br/>
                             <div class='input-group date' id='datetimepicker2'>
-                                <input id="fecFin" name="fecFin" type='text' class="form-control" required />
+                                <input id="fecFin" name="fecFin" type='text' class="form-control" v-model="arrival" required/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -175,7 +186,8 @@
                     </div>
                     <div class="row from-group">
                         <div class="col-sm-12">
-                            <button type="submit" class="btn btn-primary" value="send">Enviar</button>
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                            <!--v-on:click="findFligthsProcess"-->
                             <button type="reset" class="btn btn-primary">Limpiar</button>
                             <button type="button" class="btn btn-danger" v-on:click="updateImage">Test</button>
                         </div>
@@ -192,7 +204,7 @@
                     <h1 id="test">Cuadro playoff</h1>
                 </div>
             </div>
-         </div>
+        </div>
     </div>
 
 </div> <!-- /container -->
@@ -201,7 +213,8 @@
 <!--Bootstrap js and dependencies for datepicker -->
 <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
 <!-- Vue framework -->
 <script src="https://unpkg.com/vue"></script>
 <!-- custom js files -->
