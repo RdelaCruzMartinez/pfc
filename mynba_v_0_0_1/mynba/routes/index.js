@@ -54,25 +54,28 @@ function processData(json) {
     var cheapest = json.trips.tripOption[0],
         airlines = json.trips.data.carrier,
         cities = json.trips.data.city;
-    console.log("airlines = " + JSON.stringify(airlines));
     for (var i = 0; i < json.trips.tripOption.length; i++) {
         if (cheapest.saleTotal > json.trips.tripOption[i].saleTotal) {
             cheapest = json.trips.tripOption[i];
         }
     }
+    fs.writeFile("cities.json", JSON.stringify(cities));
     fs.writeFile("cheapestBefore.json", JSON.stringify(cheapest));
 
-    console.log("slice length = " + cheapest.slice.length);
 
     for (var ii = 0; ii < cheapest.slice.length; ii++) {
-        console.log("slice: " + ii);
         for (var iii = 0; iii < cheapest.slice[ii].segment.length; iii++) {
-            console.log("segment: " + iii);
             for (var y = 0; y < airlines.length; y++){
-                console.log("compara: " + cheapest.slice[ii].segment[iii].flight.carrier + " === " + airlines[y].code);
                 if (cheapest.slice[ii].segment[iii].flight.carrier === airlines[y].code) {
-                    console.log("TRUE");
                     cheapest.slice[ii].segment[iii].flight.carrier = airlines[y].name
+                }
+            }
+            for (var yy = 0; yy < cities.length; yy++) {
+                if(cheapest.slice[ii].segment[iii].leg[0].origin === cities[yy].code) {
+                    cheapest.slice[ii].segment[iii].leg[0].origin = cities[yy].name
+                }
+                if(cheapest.slice[ii].segment[iii].leg[0].destination === cities[yy].code) {
+                    cheapest.slice[ii].segment[iii].leg[0].destination = cities[yy].name
                 }
             }
         }
