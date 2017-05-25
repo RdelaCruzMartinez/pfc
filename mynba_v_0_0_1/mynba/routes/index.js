@@ -54,31 +54,33 @@ function processData(json) {
     var cheapest = json.trips.tripOption[0],
         airlines = json.trips.data.carrier,
         cities = json.trips.data.city;
-    console.log("airlines = " + JSON.stringify(cities));
-    for(var i = 0; i < json.trips.tripOption.length; i++) {
-        if(cheapest.saleTotal > json.trips.tripOption[i].saleTotal) {
+    console.log("airlines = " + JSON.stringify(airlines));
+    for (var i = 0; i < json.trips.tripOption.length; i++) {
+        if (cheapest.saleTotal > json.trips.tripOption[i].saleTotal) {
             cheapest = json.trips.tripOption[i];
         }
     }
-    fs.writeFile("cheapest.json", JSON.stringify(cheapest));
+    fs.writeFile("cheapestBefore.json", JSON.stringify(cheapest));
 
-/*    var escalas;
-    for(var ii = 0; ii < cheapest.slice.length; ii++) {
-        for( var iii = 0; iii < cheapest.slice[ii].segment.length; iii++) {
-            for( var iiii = 0; iiii < airlines.length; iiii++) {
-                if (cheapest.slice[ii].segment[iii].flight.carrier === airlines.code) {
-                    cheapest.slice[ii].segment[iii].flight.carrie = airlines.name;
+    console.log("slice length = " + cheapest.slice.length);
+
+    for (var ii = 0; ii < cheapest.slice.length; ii++) {
+        console.log("slice: " + ii);
+        for (var iii = 0; iii < cheapest.slice[ii].segment.length; iii++) {
+            console.log("segment: " + iii);
+            for (var y = 0; y < airlines.length; y++){
+                console.log("compara: " + cheapest.slice[ii].segment[iii].flight.carrier + " === " + airlines[y].code);
+                if (cheapest.slice[ii].segment[iii].flight.carrier === airlines[y].code) {
+                    console.log("TRUE");
+                    cheapest.slice[ii].segment[iii].flight.carrier = airlines[y].name
                 }
             }
         }
     }
 
-    fs.writeFile("NEWcheapest.json", JSON.stringify(cheapest));*/
+    fs.writeFile("cheapestAfter.json", JSON.stringify(cheapest));
 
-/*    var processedJson = {
-        price: cheapest.saleTotal,
-        departureScales: []
-    }*/
+
 }
 
 module.exports = router;
