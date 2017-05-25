@@ -26,7 +26,7 @@ module.exports =  {
                     destination: req.body.origin,
                     date: req.body.fecFin
                 }],
-                solutions: 2
+                solutions: 10
             }
         };
         return JSON.stringify(postRequest);

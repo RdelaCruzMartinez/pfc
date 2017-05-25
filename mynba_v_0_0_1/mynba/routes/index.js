@@ -30,18 +30,18 @@ router.post('/submmit', function (req, res) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: json,
+            body: json
         };
 
         console.log("before send()");
 
         request(options).then(function (response) {
-            console.log("process data");
-            processData(response);
+            var jsonResponse = JSON.parse(response);
+            processData(jsonResponse);
             console.log("200");
             res.writeHead(200, {"Content-Type": "application/json"});
             console.log("end()");
-            res.end(response)
+            res.end()
         }).catch(function (err) {
             console.log(err)
         });
@@ -51,8 +51,34 @@ router.post('/submmit', function (req, res) {
 });
 
 function processData(json) {
-    console.log("entra a proces Data");
-    //console.log(json.trips.tripOption);
+    var cheapest = json.trips.tripOption[0],
+        airlines = json.trips.data.carrier,
+        cities = json.trips.data.city;
+    console.log("airlines = " + JSON.stringify(cities));
+    for(var i = 0; i < json.trips.tripOption.length; i++) {
+        if(cheapest.saleTotal > json.trips.tripOption[i].saleTotal) {
+            cheapest = json.trips.tripOption[i];
+        }
+    }
+    fs.writeFile("cheapest.json", JSON.stringify(cheapest));
+
+/*    var escalas;
+    for(var ii = 0; ii < cheapest.slice.length; ii++) {
+        for( var iii = 0; iii < cheapest.slice[ii].segment.length; iii++) {
+            for( var iiii = 0; iiii < airlines.length; iiii++) {
+                if (cheapest.slice[ii].segment[iii].flight.carrier === airlines.code) {
+                    cheapest.slice[ii].segment[iii].flight.carrie = airlines.name;
+                }
+            }
+        }
+    }
+
+    fs.writeFile("NEWcheapest.json", JSON.stringify(cheapest));*/
+
+/*    var processedJson = {
+        price: cheapest.saleTotal,
+        departureScales: []
+    }*/
 }
 
 module.exports = router;
