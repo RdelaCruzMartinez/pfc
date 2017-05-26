@@ -44,10 +44,8 @@ new Vue({
     },
     methods: {
         updateImage: function (zone) {
-            console.log(zone);
             var select = document.getElementById(zone);
             var value = select.options[select.selectedIndex].value;
-            console.log("value => " + value);
             if (zone == "eastTeams") {
                 for (var i = 0; i < this.eastTeams.length; i++) {
                     if (this.eastTeams[i].iata == value) {
