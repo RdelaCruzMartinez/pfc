@@ -7,6 +7,8 @@ new Vue({
         passengers: '',
         departure: '',
         arrival: '',
+        requestedFlight: false,
+        flightInformation: {},
         westTeams: [
             {name: 'Golden State Warriors', iata: 'SFO', logo: './images/teams/west/warriors.png'},
             {name: 'Los Angeles Lakers', iata: 'LAX', logo: './images/teams/west/lakers.png'},
@@ -70,6 +72,21 @@ new Vue({
         clear: function () {
             var img = document.getElementsByName("teamLogo");
             img[0].setAttribute("src", "");
+        },
+        submitForm: function () {
+            console.log("entra");
+            $.ajax({
+                url: '/submmit',
+                type: "POST",
+                data: $('#teamForm').serialize(),
+                success: function (data) {
+                    //document.getElementById("test").innerText = data;
+                    console.log("json de vuelta: " + JSON.stringify(data));
+                },
+                error: function (data) {
+                    alert("Bad Request");
+                }
+            })
         }
     }
 });
@@ -91,20 +108,5 @@ $(function () {
     $("#datetimepicker2").on("dp.change", function (e) {
         $('#datetimepicker1').data("DateTimePicker").maxDate(e.date);
     });
-
-    $('#teamForm').on('submit', function (e) {
-        //e.preventDefault();
-        $.ajax({
-            url: $(this).attr('action') || window.location.pathname,
-            type: "POST",
-            data: $(this).serialize(),
-            success: function (data) {
-                document.getElementById("test").innerText = data;
-            },
-            error: function (data) {
-                alert("Bad Request");
-            }
-        })
-    })
 
 });

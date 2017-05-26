@@ -43,11 +43,11 @@ router.post('/submmit', function (req, res) {
         request(options).then(function (response) {
             response = JSON.parse(response);
            var jsonResponse = processData(response);
-            buildJsonResponse(jsonResponse);
+           jsonResponse = buildJsonResponse(jsonResponse);
             console.log("200");
             res.writeHead(200, {"Content-Type": "application/json"});
             console.log("end()");
-            res.end()
+            res.end(JSON.stringify(jsonResponse));
         }).catch(function (err) {
             console.log(err)
         });
@@ -145,6 +145,7 @@ function buildJsonResponse(processedData) {
     }
 
     fs.writeFile("finalJson.json", JSON.stringify(finalJson));
+    return finalJson;
 }
 
 module.exports = router;
