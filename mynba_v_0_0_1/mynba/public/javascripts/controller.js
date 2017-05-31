@@ -80,13 +80,25 @@ new Vue({
                 type: "POST",
                 data: $('#teamForm').serialize(),
                 success: function (data) {
+                    console.log("respuesta de ajax");
+                    console.log("typo devuelto = " + typeof data);
                     //document.getElementById("test").innerText = data;
                     console.log("json de vuelta: " + JSON.stringify(data));
+
+                    console.log("se copia la respuesta en el objeto flightInformation");
+                    console.log("estado actual del objeto: " + this.flightInformation);
+                    console.log("estado actual del objeto stringify: " + JSON.stringify(this.flightInformation));
                 },
                 error: function (data) {
                     alert("Bad Request");
                 }
             })
+        },
+        test: function () {
+            console.log("intentando acceder al objeto");
+            console.log("flightInformation => " + this.flightInformation);
+            console.log("flightInformation stringify => " + JSON.stringify(this.flightInformation));
+            this.flightInformation.foo = 'var';
         }
     }
 });

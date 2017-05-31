@@ -90,19 +90,19 @@ function processData(json) {
     fs.writeFile("cheapestBefore.json", JSON.stringify(cheapest));
 
 
-    for (var ii = 0; ii < cheapest.slice.length; ii++) {
-        for (var iii = 0; iii < cheapest.slice[ii].segment.length; iii++) {
+    for (var j = 0; j < cheapest.slice.length; j++) {
+        for (var k = 0; k < cheapest.slice[j].segment.length; k++) {
             for (var y = 0; y < airlines.length; y++){
-                if (cheapest.slice[ii].segment[iii].flight.carrier === airlines[y].code) {
-                    cheapest.slice[ii].segment[iii].flight.carrier = airlines[y].name
+                if (cheapest.slice[j].segment[k].flight.carrier === airlines[y].code) {
+                    cheapest.slice[j].segment[k].flight.carrier = airlines[y].name
                 }
             }
             for (var yy = 0; yy < cities.length; yy++) {
-                if(cheapest.slice[ii].segment[iii].leg[0].origin === cities[yy].code) {
-                    cheapest.slice[ii].segment[iii].leg[0].origin = cities[yy].name
+                if(cheapest.slice[j].segment[k].leg[0].origin === cities[yy].code) {
+                    cheapest.slice[j].segment[k].leg[0].origin = cities[yy].name
                 }
-                if(cheapest.slice[ii].segment[iii].leg[0].destination === cities[yy].code) {
-                    cheapest.slice[ii].segment[iii].leg[0].destination = cities[yy].name
+                if(cheapest.slice[j].segment[k].leg[0].destination === cities[yy].code) {
+                    cheapest.slice[j].segment[k].leg[0].destination = cities[yy].name
                 }
             }
         }
@@ -133,12 +133,12 @@ function buildJsonResponse(processedData) {
         finalJson.departureStopOvers.push(departure);
     }
 
-    for (var ii = 0; ii < processedData.slice[1].segment.length; ii++) {
+    for (var j = 0; j < processedData.slice[1].segment.length; j++) {
         var arrival = {
-            origin: processedData.slice[1].segment[ii].leg[0].origin,
-            destination: processedData.slice[1].segment[ii].leg[0].destination,
-            airline: processedData.slice[1].segment[ii].flight.carrier,
-            duration: processedData.slice[1].segment[ii].leg[0].duration
+            origin: processedData.slice[1].segment[j].leg[0].origin,
+            destination: processedData.slice[1].segment[j].leg[0].destination,
+            airline: processedData.slice[1].segment[j].flight.carrier,
+            duration: processedData.slice[1].segment[j].leg[0].duration
         };
 
         finalJson.arrivalStopOvers.push(arrival);
