@@ -105,12 +105,14 @@ new Vue({
 
 $(function () {
     $('#datetimepicker1').datetimepicker({
-        format: 'YYYY-MM-DD'
+        format: 'YYYY-MM-DD',
+        locale: 'es'
     });
 
     $('#datetimepicker2').datetimepicker({
         useCurrent: false,
-        format: 'YYYY-MM-DD'
+        format: 'YYYY-MM-DD',
+        locale: 'es'
     });
 
     $("#datetimepicker1").on("dp.change", function (e) {
