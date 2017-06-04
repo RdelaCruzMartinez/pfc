@@ -74,31 +74,28 @@ new Vue({
             img[0].setAttribute("src", "");
         },
         submitForm: function () {
-            console.log("entra");
-            $.ajax({
-                url: '/submmit',
-                type: "POST",
-                data: $('#teamForm').serialize(),
-                success: function (data) {
-                    console.log("respuesta de ajax");
-                    console.log("typo devuelto = " + typeof data);
-                    //document.getElementById("test").innerText = data;
-                    console.log("json de vuelta: " + JSON.stringify(data));
-
-                    console.log("se copia la respuesta en el objeto flightInformation");
-                    console.log("estado actual del objeto: " + this.flightInformation);
-                    console.log("estado actual del objeto stringify: " + JSON.stringify(this.flightInformation));
-                },
-                error: function (data) {
-                    alert("Bad Request");
-                }
-            })
+            var team = this.team,
+                origin = this.origin,
+                passengers = this.passengers,
+                fecIni = this.departure,
+                fecFin = this.arrival;
+            console.log("Capturando valores");
+            console.log("team = " + team);
+            console.log("origin = " + origin);
+            console.log("passengers = " + passengers);
+            console.log("fecIni = " + fecIni);
+            console.log("fecFin = " + fecFin);
+            this.$http.post('/submmit', {team: team, origin: origin, passengers: passengers, fecIni: '2017-06-06', fecFin: '2017-06-28'})
+                .then(function (response) {
+                    this.flightInformation = response.body;
+                    console.log("done");
+                });
         },
         test: function () {
-            console.log("intentando acceder al objeto");
-            console.log("flightInformation => " + this.flightInformation);
-            console.log("flightInformation stringify => " + JSON.stringify(this.flightInformation));
-            this.flightInformation.foo = 'var';
+            console.log( this.flightInformation);
+            console.log(JSON.stringify( this.flightInformation));
+            console.log(this.flightInformation.totalCost);
+
         }
     }
 });
