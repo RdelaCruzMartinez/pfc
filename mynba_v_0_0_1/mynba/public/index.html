@@ -104,7 +104,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <img id="eastLogo" name="teamLogo" class="teamLogo" src="">
+                                    <img id="eastLogo" name="responsive-image" class="responsive-image" src="">
                                 </div>
                             </div>
                             <div v-if="conference === 'west'">
@@ -119,7 +119,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-6">
-                                    <img id="westLogo" name="teamLogo" class="teamLogo" src="">
+                                    <img id="westLogo" name="responsive-image" class="responsive-image" src="">
                                 </div>
                             </div>
                         </div>
@@ -201,7 +201,34 @@
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <h1 id="test">Cuadro playoff</h1>
+                    <div v-if="requestedFlight" class="col-sm-6 col-sm-offset-5">
+                        <img id="loadingGif" src="images/loading.gif" class="responsive-image">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h2>Detalles del vuelo</h2>
+                        </div>
+                    </div>
+                    <div class="row" v-if="ok">
+                        <div class="col-sm-12">
+                            <p>Vuelo de {{flightInformation.departureStopOvers[0].origin}} con destino a {{flightInformation.departureStopOvers[2].destination}} </p>
+                        </div>
+                        <div class="col-sm-12">
+                            <p>Escalas ida:</p>
+                            <ul v-for="departure in flightInformation.departureStopOvers">
+                                <li> origen ->{{departure.origin}}, destino -> {{departure.destination}}, duración del vuelo -> {{departure.duration}} min, aerolinia -> {{departure.airline}} </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-12">
+                            <p>Escalas vuelta:</p>
+                            <ul v-for="arrival in flightInformation.arrivalStopOvers">
+                                <li> origen ->{{arrival.origin}}, destino -> {{arrival.destination}}, duración del vuelo -> {{arrival.duration}} min, aerolinia -> {{arrival.airline}} </li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>Coste total: {{flightInformation.totalCost}}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

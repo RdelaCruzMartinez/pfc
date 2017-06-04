@@ -8,6 +8,9 @@ new Vue({
         departure: '',
         arrival: '',
         requestedFlight: false,
+        ok: false,
+        departureStopOvers: 0,
+        arrivalStopOvers: 0,
         flightInformation: {},
         westTeams: [
             {name: 'Golden State Warriors', iata: 'SFO', logo: './images/teams/west/warriors.png'},
@@ -85,17 +88,25 @@ new Vue({
             console.log("passengers = " + passengers);
             console.log("fecIni = " + fecIni);
             console.log("fecFin = " + fecFin);
+            this.requestedFlight = !this.requestedFlight;
             this.$http.post('/submmit', {team: team, origin: origin, passengers: passengers, fecIni: '2017-06-06', fecFin: '2017-06-28'})
                 .then(function (response) {
                     this.flightInformation = response.body;
-                    console.log("done");
+                    console.log(JSON.stringify(this.flightInformation));
+                    console.log("departureStopOvers.length => " + this.flightInformation.departureStopOvers.length);
+                    this.departureStopOvers = this.flightInformation.departureStopOvers.length - 1;
+                    console.log("Valor de departureStopOvers = " + this.departureStopOvers);
+                    console.log("arrivalStopOvers.length => " + this.flightInformation.arrivalStopOvers.length);
+                    this.arrivalStopOvers = this.flightInformation.arrivalStopOvers.length - 1;
+                    console.log("Valor de arrivals => " + this.arrivalStopOvers);
+
+                    this.requestedFlight = !this.requestedFlight;
                 });
         },
         test: function () {
-            console.log( this.flightInformation);
-            console.log(JSON.stringify( this.flightInformation));
-            console.log(this.flightInformation.totalCost);
-
+            console.log("this.departureStopOvers => " + this.departureStopOvers);
+            console.log("this.arrivalStopOvers => " + this.arrivalStopOvers);
+            this.ok = !this.ok;
         }
     }
 });
