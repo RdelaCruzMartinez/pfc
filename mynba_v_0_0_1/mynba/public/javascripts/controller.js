@@ -5,12 +5,10 @@ new Vue({
         team: '',
         origin: '',
         passengers: '',
-        departure: '',
-        arrival: '',
         requestedFlight: false,
         ok: false,
-        departureStopOvers: 0,
-        arrivalStopOvers: 0,
+        totalDepartureStopOvers: 0,
+        totalArrivalStopOvers: 0,
         flightInformation: {},
         westTeams: [
             {name: 'Golden State Warriors', iata: 'SFO', logo: './images/teams/west/warriors.png'},
@@ -80,8 +78,8 @@ new Vue({
             var team = this.team,
                 origin = this.origin,
                 passengers = this.passengers,
-                fecIni = this.departure,
-                fecFin = this.arrival;
+                fecIni = $('#fecIni').val(),
+                fecFin = $('#fecFin').val();
             console.log("Capturando valores");
             console.log("team = " + team);
             console.log("origin = " + origin);
@@ -89,23 +87,19 @@ new Vue({
             console.log("fecIni = " + fecIni);
             console.log("fecFin = " + fecFin);
             this.requestedFlight = !this.requestedFlight;
-            this.$http.post('/submmit', {team: team, origin: origin, passengers: passengers, fecIni: '2017-06-06', fecFin: '2017-06-28'})
+            this.$http.post('/submmit', {team: team, origin: origin, passengers: passengers, fecIni: fecIni, fecFin: fecFin})
                 .then(function (response) {
                     this.flightInformation = response.body;
                     console.log(JSON.stringify(this.flightInformation));
                     console.log("departureStopOvers.length => " + this.flightInformation.departureStopOvers.length);
-                    this.departureStopOvers = this.flightInformation.departureStopOvers.length - 1;
-                    console.log("Valor de departureStopOvers = " + this.departureStopOvers);
-                    console.log("arrivalStopOvers.length => " + this.flightInformation.arrivalStopOvers.length);
-                    this.arrivalStopOvers = this.flightInformation.arrivalStopOvers.length - 1;
-                    console.log("Valor de arrivals => " + this.arrivalStopOvers);
+                    this.totalDepartureStopOvers = this.flightInformation.departureStopOvers.length - 1;
+                    console.log("Valor de departureStopOvers = " + this.totalDepartureStopOvers);
 
                     this.requestedFlight = !this.requestedFlight;
                 });
         },
         test: function () {
-            console.log("this.departureStopOvers => " + this.departureStopOvers);
-            console.log("this.arrivalStopOvers => " + this.arrivalStopOvers);
+            console.log("this.departureStopOvers => " + this.totalDepartureStopOvers);
             this.ok = !this.ok;
         }
     }
