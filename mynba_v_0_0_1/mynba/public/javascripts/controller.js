@@ -8,7 +8,6 @@ new Vue({
         loading: false,
         requestedFlight: false,
         totalDepartureStopOvers: 0,
-        totalArrivalStopOvers: 0,
         flightInformation: {},
         westTeams: [
             {name: 'Golden State Warriors', iata: 'SFO', logo: './images/teams/west/warriors.png'},
