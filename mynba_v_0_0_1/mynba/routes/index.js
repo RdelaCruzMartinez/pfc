@@ -116,7 +116,7 @@ function processData(json) {
 function buildJsonResponse(processedData) {
 
     var finalJson = {
-        totalCost: processedData.saleTotal,
+        totalCost: processedData.saleTotal.slice(3, 50),
         departureStopOvers: [],
         arrivalStopOvers: []
     };

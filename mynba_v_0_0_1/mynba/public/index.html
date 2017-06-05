@@ -205,29 +205,38 @@
                         <img id="loadingGif" src="images/loading.gif" class="responsive-image">
                     </div>
                     <div class="row" v-if="requestedFlight">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <h2>Detalles del vuelo</h2>
-                            </div>
-                        </div>
-                        <div class="col-sm-12">
-                            <p>Vuelo de {{flightInformation.departureStopOvers[0].origin}} con destino a {{flightInformation.departureStopOvers[totalDepartureStopOvers].destination}} </p>
-                        </div>
-                        <div class="col-sm-12">
-                            <p>Escalas ida:</p>
-                            <ul v-for="departure in flightInformation.departureStopOvers">
-                                <li> origen ->{{departure.origin}}, destino -> {{departure.destination}}, duración del vuelo -> {{departure.duration}} min, aerolinia -> {{departure.airline}} </li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-12">
-                            <p>Escalas vuelta:</p>
-                            <ul v-for="arrival in flightInformation.arrivalStopOvers">
-                                <li> origen ->{{arrival.origin}}, destino -> {{arrival.destination}}, duración del vuelo -> {{arrival.duration}} min, aerolinia -> {{arrival.airline}} </li>
-                            </ul>
-                        </div>
-                        <div class="col-sm-6">
-                            <p>Coste total: {{flightInformation.totalCost}}</p>
-                        </div>
+                        <img src="images/plane.png" class="responsive-image">
+                        <h3>Escalas Ida</h3>
+                        <table class="table table-hover">
+                            <thead>
+                                <th>De</th>
+                                <th>A</th>
+                                <th>Aerolinia</th>
+                                <th>Duración</th>
+                            </thead>
+                            <tbody  v-for="departure in flightInformation.departureStopOvers">
+                                <td>{{departure.origin}}</td>
+                                <td>{{departure.destination}}</td>
+                                <td>{{departure.airline}}</td>
+                                <td>{{departure.duration}} min</td>
+                            </tbody>
+                        </table>
+                        <img src="images/flippedPlane.png" class="responsive-image">
+                        <h3>Escalas Vuelta</h3>
+                        <table class="table table-hover">
+                            <thead>
+                            <th>De</th>
+                            <th>A</th>
+                            <th>Aerolinia</th>
+                            <th>Duración</th>
+                            </thead>
+                            <tbody  v-for="arrival in flightInformation.arrivalStopOvers">
+                            <td>{{arrival.origin}}</td>
+                            <td>{{arrival.destination}}</td>
+                            <td>{{arrival.airline}}</td>
+                            <td>{{arrival.duration}} min</td>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
