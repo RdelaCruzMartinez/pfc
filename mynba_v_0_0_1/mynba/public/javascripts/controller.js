@@ -5,8 +5,8 @@ new Vue({
         team: '',
         origin: '',
         passengers: '',
+        loading: false,
         requestedFlight: false,
-        ok: false,
         totalDepartureStopOvers: 0,
         totalArrivalStopOvers: 0,
         flightInformation: {},
@@ -86,7 +86,8 @@ new Vue({
             console.log("passengers = " + passengers);
             console.log("fecIni = " + fecIni);
             console.log("fecFin = " + fecFin);
-            this.requestedFlight = !this.requestedFlight;
+            this.requestedFlight = false;
+            this.loading = true; //se pone a true
             this.$http.post('/submmit', {team: team, origin: origin, passengers: passengers, fecIni: fecIni, fecFin: fecFin})
                 .then(function (response) {
                     this.flightInformation = response.body;
@@ -95,15 +96,18 @@ new Vue({
                     this.totalDepartureStopOvers = this.flightInformation.departureStopOvers.length - 1;
                     console.log("Valor de departureStopOvers = " + this.totalDepartureStopOvers);
 
-                    this.requestedFlight = !this.requestedFlight;
+                    this.loading = false;
+                    this.requestedFlight = true;
                 });
         },
         test: function () {
             console.log("this.departureStopOvers => " + this.totalDepartureStopOvers);
-            this.ok = !this.ok;
+            this.requestedFlight = !this.requestedFlight;
         }
     }
 });
+
+//requestedFlight
 
 $(function () {
     $('#datetimepicker1').datetimepicker({
