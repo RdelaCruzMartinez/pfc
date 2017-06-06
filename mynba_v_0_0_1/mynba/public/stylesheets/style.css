@@ -23,4 +23,15 @@ li {
 
 #myCarousel {
   margin-bottom: 5%;
+  font-size: 5em;
+}
+
+#teamSelect {
+  padding: 0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+#originSelect {
+  margin-bottom: 15px;
 }

@@ -30,7 +30,7 @@ new Vue({
             {name: 'Cleveland Cavaliers', iata: 'CLE', logo: './images/teams/east/cavs.png'},
             {name: 'Chicago Bulls', iata: 'ORD', logo: './images/teams/east/bulls.png'},
             {name: 'Miami Heat', iata: 'MIA', logo: './images/teams/east/miami.png'},
-            {name: 'New York Knicks', iata: 'JFK', logo: './images/teams/east/nicks_250x248.png'},
+            {name: 'New York Knicks', iata: 'JFK', logo: './images/teams/east/nicks.png'},
             {name: 'Boston Celtics', iata: 'BOS', logo: './images/teams/east/celtics.png'},
             {name: 'Toronto Raptors', iata: 'YYZ', logo: './images/teams/east/raptors.png'},
             {name: 'Atlanta Hawks', iata: 'ATL', logo: './images/teams/east/atlanta.png'},
@@ -72,6 +72,7 @@ new Vue({
         clear: function () {
             var img = document.getElementsByName("teamLogo");
             img[0].setAttribute("src", "");
+
         },
         submitForm: function () {
             var team = this.team,

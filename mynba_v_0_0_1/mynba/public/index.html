@@ -26,16 +26,27 @@
 
 <div class="container-fluid" id="app">
 
-    <div class="header clearfix">
-        <nav>
-            <ul class="nav nav-pills pull-right">
-                <li role="presentation" class="active"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">About</a></li>
-                <li role="presentation"><a href="#">Contact</a></li>
-            </ul>
-        </nav>
-        <h3 class="text-muted">MyNBA</h3>
-    </div>
+
+    <nav class="navbar navbar-default navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand text-muted"href="#">MyNBA</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav nav-pills pull-right">
+                    <li role="presentation"><a href="#flight">Detalles del vuelo</a></li>
+                    <li role="presentation"><a href="#about">About</a></li>
+                </ul>
+            </div>
+         </div>
+    </nav>
+
 
     <div class="row">
         <div class="col-sm-12">
@@ -80,36 +91,32 @@
                 <form id="teamForm" name="teamForm" action="/submmit" method="post" v-on:submit.prevent="submitForm">
                     <div class="row form-group">
                         <div class="col-sm-6">
-                            <label>Conferencia:</label>
-                            <br>
-                            <select name="selectConference" id="selectConference" v-model="conference" required>
-                                <option value="">Selecciona una conferencia</option>
-                                <option value="east">Este</option>
-                                <option value="west">Oeste</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-sm-12">
-                            <label>Selecciona un equipo:</label>
-                            <div v-if="conference === 'east'">
-                                <div class="col-sm-6">
+                            <div class="col-dm-6">
+                                <label>Conferencia:</label>
+                                <br>
+                                <select name="selectConference" id="selectConference" v-model="conference"
+                                        class="form-control" required>
+                                    <option value="">¿Conferencia?</option>
+                                    <option value="east">Este</option>
+                                    <option value="west">Oeste</option>
+                                </select>
+                            </div>
+                            <div id="teamSelect" class="col-sm-6">
+                                <label>Selecciona un equipo:</label>
+                                <div v-if="conference === 'east'">
                                     <select id="eastTeams" name="team" v-on:click="updateImage('eastTeams')"
+                                            class="form-control"
                                             v-model="team" required>
-                                        <option value="">¿Que equipo te gustaria ver?</option>
+                                        <option value="">¿Que equipo?</option>
                                         <option class="teamName" v-for="team in eastTeams"
                                                 v-bind:value="team.iata">
                                             {{team.name}}
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-sm-6">
-                                    <img id="eastLogo" name="responsive-image" class="responsive-image" src="">
-                                </div>
-                            </div>
-                            <div v-if="conference === 'west'">
-                                <div class="col-sm-6">
+                                <div v-if="conference === 'west'">
                                     <select id="westTeams" name="team" v-on:click="updateImage('westTeams')"
+                                            class="form-control"
                                             v-model="team" required>
                                         <option value="">¿Que equipo te gustaria ver?</option>
                                         <option class="teamName" v-for="team in westTeams"
@@ -118,18 +125,23 @@
                                         </option>
                                     </select>
                                 </div>
-                                <div class="col-sm-6">
-                                    <img id="westLogo" name="responsive-image" class="responsive-image" src="">
-                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div v-if="conference === 'east'" class="col-sm-12">
+                                <img id="eastLogo" name="teamLogo" class="responsive-image" src="">
+                            </div>
+                            <div v-if="conference === 'west'" class="col-sm-12">
+                                <img id="westLogo" name="teamLogo" class="responsive-image" src="">
                             </div>
                         </div>
                     </div>
                     <div class="row form-group">
-                        <div class="col-sm-3">
+                        <div id="originSelect" class="col-sm-3">
                             <label>Origen:</label>
                             <br>
-                            <select name="origin" v-model="origin" required>
-                                <option value="">¿Desde donde puedes viajar?</option>
+                            <select name="origin" v-model="origin" class="form-control" required>
+                                <option value="">¿Desde donde?</option>
                                 <option value="BCN">Barcelona</option>
                                 <option value="BIO">Bilbao</option>
                                 <option value="RJL">Logroño</option>
@@ -147,10 +159,10 @@
                                 <option value="ZAZ">Zaragoza</option>
                             </select>
                         </div>
-                        <div class="col-sm-3 col-sm-offset-3">
+                        <div class="col-sm-3">
                             <label>Nº Pasajeros</label>
                             <br>
-                            <select name="passengers" v-model="passengers" required>>
+                            <select name="passengers" v-model="passengers" class="form-control" required>
                                 <option value="">¿Cuantos sereis?</option>
                                 <option value="1" selected>1</option>
                                 <option value="2">2</option>
@@ -204,40 +216,45 @@
                     <div v-if="loading" class="col-sm-6 col-sm-offset-5">
                         <img id="loadingGif" src="images/loading.gif" class="responsive-image">
                     </div>
-                    <div class="row" v-if="requestedFlight">
-                        <h3 class="text-center">Vuelo de {{flightInformation.departureStopOvers[0].origin}} a {{flightInformation.departureStopOvers[totalDepartureStopOvers].destination}}</h3>
+                    <div id="flight" class="row" v-if="requestedFlight">
+                        <h3 class="text-center">Vuelo de {{flightInformation.departureStopOvers[0].origin}} a
+                            {{flightInformation.departureStopOvers[totalDepartureStopOvers].destination}}</h3>
                         <img src="images/plane.png" class="responsive-image">
                         <h3>Escalas Ida</h3>
-                        <table class="table table-hover">
-                            <thead>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
                                 <th>De</th>
                                 <th>A</th>
                                 <th>Aerolinia</th>
                                 <th>Duración</th>
-                            </thead>
-                            <tbody  v-for="departure in flightInformation.departureStopOvers">
+                                </thead>
+                                <tbody v-for="departure in flightInformation.departureStopOvers">
                                 <td>{{departure.origin}}</td>
                                 <td>{{departure.destination}}</td>
                                 <td>{{departure.airline}}</td>
                                 <td>{{departure.duration}} min</td>
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                         <img src="images/flippedPlane.png" class="responsive-image">
                         <h3>Escalas Vuelta</h3>
-                        <table class="table table-hover">
-                            <thead>
-                            <th>De</th>
-                            <th>A</th>
-                            <th>Aerolinia</th>
-                            <th>Duración</th>
-                            </thead>
-                            <tbody  v-for="arrival in flightInformation.arrivalStopOvers">
-                            <td>{{arrival.origin}}</td>
-                            <td>{{arrival.destination}}</td>
-                            <td>{{arrival.airline}}</td>
-                            <td>{{arrival.duration}} min</td>
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <th>De</th>
+                                <th>A</th>
+                                <th>Aerolinia</th>
+                                <th>Duración</th>
+                                </thead>
+                                <tbody v-for="arrival in flightInformation.arrivalStopOvers">
+                                <td>{{arrival.origin}}</td>
+                                <td>{{arrival.destination}}</td>
+                                <td>{{arrival.airline}}</td>
+                                <td>{{arrival.duration}} min</td>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
