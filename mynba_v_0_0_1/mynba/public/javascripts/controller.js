@@ -98,7 +98,7 @@ new Vue({
                     this.requestedFlight = true;
                 }, function (error) {
                     this.loading = false;
-                    alert("Lo semtimos mucho, ha habido un error procesando su busqueda :(");
+                    alert("Lo semtimos mucho, ha habido un error procesando su búsqueda :(");
                     console.log(error);
                 });
         },
