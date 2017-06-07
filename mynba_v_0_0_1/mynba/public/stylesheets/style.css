@@ -10,6 +10,15 @@ li {
   list-style-type: none;
 }
 
+body {
+  padding: 0;
+}
+
+@media (max-width: 767px) {
+  .carousel h3 {
+    font-size: 15px !important;
+  }
+}
 
 .carousel-inner > .item > img {
   margin: 0 auto;
@@ -21,9 +30,19 @@ li {
   width: auto;
 }
 
+#app {
+  width: 100%;
+  margin: 0;
+}
+
+
+
 #myCarousel {
   margin-bottom: 5%;
-  font-size: 5em;
+}
+
+#myCarousel h1 {
+  font-size: 2em;
 }
 
 #teamSelect {
@@ -35,3 +54,4 @@ li {
 #originSelect {
   margin-bottom: 15px;
 }
+
