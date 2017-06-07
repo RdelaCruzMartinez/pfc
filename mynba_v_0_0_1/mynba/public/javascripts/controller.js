@@ -35,7 +35,7 @@ new Vue({
             {name: 'Toronto Raptors', iata: 'YYZ', logo: './images/teams/east/raptors.png'},
             {name: 'Atlanta Hawks', iata: 'ATL', logo: './images/teams/east/atlanta.png'},
             {name: 'Indiana Pacers', iata: 'IND', logo: './images/teams/east/indiana.png'},
-            {name: 'Brooklyn Nets', iata: 'JFK', logo: './images/teams/east/brooklyn.png'},
+            {name: 'Brooklyn Nets', iata: 'LGA', logo: './images/teams/east/brooklyn.png'},
             {name: 'Philadelphia 76ers', iata: 'PHL', logo: './images/teams/east/phila.png'},
             {name: 'Detroit Pistons', iata: 'DTW', logo: './images/teams/east/pistons.png'},
             {name: 'Washington Wizards', iata: 'IAD', logo: './images/teams/east/wizards.png'},
@@ -92,12 +92,14 @@ new Vue({
                 .then(function (response) {
                     this.flightInformation = response.body;
                     console.log(JSON.stringify(this.flightInformation));
-                    console.log("departureStopOvers.length => " + this.flightInformation.departureStopOvers.length);
                     this.totalDepartureStopOvers = this.flightInformation.departureStopOvers.length - 1;
-                    console.log("Valor de departureStopOvers = " + this.totalDepartureStopOvers);
 
                     this.loading = false;
                     this.requestedFlight = true;
+                }, function (error) {
+                    this.loading = false;
+                    alert("Lo semtimos mucho, ha habido un error procesando su busqueda :(");
+                    console.log(error);
                 });
         },
         test: function () {

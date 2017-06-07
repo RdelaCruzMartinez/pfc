@@ -16,11 +16,22 @@ body {
 
 @media (max-width: 767px) {
   .carousel h3 {
-    font-size: 15px !important;
+    font-size: 20px !important;
   }
 }
 
 .carousel-inner > .item > img {
+  margin: 0 auto;
+}
+
+/*.team-logo {
+  max-width: 100%;
+  height: auto;
+  width: auto;
+  margin-left: 25%;
+}*/
+
+.img-responsive {
   margin: 0 auto;
 }
 
