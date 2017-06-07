@@ -5,11 +5,14 @@ Este proyecto ha sido realizado en el plazo de un mes para como prueba final del
 # Tecnologías utilizadas
 
 ## Front
-..* HTML y CSS con Bootstrap
-..* JavaScript con Jquery y VUE.js
+
+- HTML y CSS con Bootstrap
+
+- JavaScript con Jquery y VUE.js
 
 ## Back
-..* Node.js con Express y npm para la gestión de librerías.
+
+- Node.js con Express y npm para la gestión de librerías.
 
 # Proceso de instalación
 
