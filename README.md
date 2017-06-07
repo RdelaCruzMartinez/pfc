@@ -2,19 +2,19 @@
 
 Este proyecto ha sido realizado en el plazo de un mes para como prueba final del curso, consiste en una aplicación web encargada de estimar los costes de un viaje a ver un partido de la NBA
 
-# Tecnologías utilizadas
+## Tecnologías utilizadas
 
-## Front
+### Front
 
 - HTML y CSS con Bootstrap
 
 - JavaScript con Jquery y VUE.js
 
-## Back
+### Back
 
 - Node.js con Express y npm para la gestión de librerías.
 
-# Proceso de instalación
+## Proceso de instalación
 
 1. Tener instalado Node.js
 
