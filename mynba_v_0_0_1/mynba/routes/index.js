@@ -1,7 +1,9 @@
 var express = require('express');
 var fs = require('fs'); //modulo de node para importar archivos.
 var router = express.Router();
-var body = {};
+var mongo = require('mongodb').MongoClient;
+var assert = require('assert');
+var dbConnection = 'mongodb://localhost:27017/mynba';
 const request = require('request-promise');
 
 /* GET home page. */
@@ -21,6 +23,7 @@ router.get('/', function (request, response, next) {
 
 
 router.post('/submmit', function (req, res) {
+    console.log("DATOS RECIBIDOS:");
     console.log("req.body.team => " + req.body.team);
     console.log("req.body.origin => " + req.body.origin);
     console.log("req.body.passengers => " + req.body.passengers);
@@ -28,6 +31,7 @@ router.post('/submmit', function (req, res) {
     console.log("req.body.fecFin => " + req.body.fecFin);
 
     var json = buildJsonRequest(req);
+    var team = req.body.team;
 
     var options = {
         method: 'POST',
@@ -37,16 +41,12 @@ router.post('/submmit', function (req, res) {
         },
         body: json
     };
-    console.log("before send()");
 
     request(options).then(function (response) {
+        console.log("*****Paso 1 Parse response");
         response = JSON.parse(response);
         var jsonResponse = processData(response);
-        jsonResponse = buildJsonResponse(jsonResponse);
-        console.log("200");
-        res.writeHead(200, {"Content-Type": "application/json"});
-        console.log("end()");
-        res.end(JSON.stringify(jsonResponse));
+        getTicketPrice(jsonResponse, buildFinalJson, sendResponse, team, res);
     }).catch(function (err) {
         console.log(err);
         res.writeHead(500);
@@ -79,6 +79,7 @@ function buildJsonRequest(req) {
 }
 
 function processData(json) {
+    console.log("*****Paso 2 processData()");
     var cheapest = json.trips.tripOption[0],
         airlines = json.trips.data.carrier,
         cities = json.trips.data.city;
@@ -113,10 +114,34 @@ function processData(json) {
 
 }
 
-function buildJsonResponse(processedData) {
+function getTicketPrice(jsonResponse, buildFinalJson, sendResponse, team, res) {
+    console.log("*****Paso 3 getTicketPrice()");
+    var ticketPrice = "";
+    mongo.connect(dbConnection, function (err, db) {
+        console.log("ABRE CONEXION A BD");
+        assert.equal(null, err);
+        var cursor = db.collection('tickets').find();
+        cursor.forEach(function (data, err) {
+            assert.equal(null, err);
+            if (data.team == team) {
+                ticketPrice = data.price;
+            }
+        }, function () {
+            console.log("CIERRA CONEXION A BD");
+            db.close();
+            buildFinalJson(jsonResponse, ticketPrice, sendResponse, res);
+        });
+    });
+}
+
+function buildFinalJson(processedData, ticketPrice, sendResponse, res) {
+
+    console.log("*****Paso 4 buildFinalJSON()");
 
     var finalJson = {
-        totalCost: processedData.saleTotal.slice(3, 50),
+        fligthCost: processedData.saleTotal.slice(3, 50),
+        ticketCost: ticketPrice,
+        totalCost: (parseFloat(processedData.saleTotal.slice(3, 50)) + ticketPrice).toFixed(2),
         departureStopOvers: [],
         arrivalStopOvers: []
     };
@@ -145,7 +170,15 @@ function buildJsonResponse(processedData) {
     }
 
     fs.writeFile("finalJson.json", JSON.stringify(finalJson));
-    return finalJson;
+    sendResponse(finalJson, res);
+}
+
+function sendResponse(jsonResponse, res) {
+    console.log("*****Paso 5 sendResponse()");
+    console.log("200");
+    res.writeHead(200, {"Content-Type": "application/json"});
+    console.log("end()");
+    res.end(JSON.stringify(jsonResponse));
 }
 
 module.exports = router;
