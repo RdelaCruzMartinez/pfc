@@ -74,13 +74,13 @@
                     <div class="item">
                         <img src="./images/quicken_loans_arena.jpg" alt="quicken_loans_arena"/>
                         <div class="carousel-caption">
-                            <h3>Siente el ambiente de los campeones en el Quicken arena</h3>
+                            <h3>Siente el ambiente del Quicken arena</h3>
                         </div>
                     </div>
                     <div class="item">
                         <img src="./images/madisonsg.jpg" alt="madison_square_garden"/>
                         <div class="carousel-caption">
-                            <h3>Unete a la fiesta en el Madison Square Garden</h3>
+                            <h3>Únete a la fiesta en el Madison Square Garden</h3>
                         </div>
                     </div>
                 </div>
@@ -110,7 +110,7 @@
                                     <select id="eastTeams" name="team" v-on:click="updateImage('eastTeams')"
                                             class="form-control"
                                             v-model="team" required>
-                                        <option value="">¿Que equipo te gustaria ver?</option>
+                                        <option value="">¿Qué equipo te gustaría ver?</option>
                                         <option class="teamName" v-for="team in eastTeams"
                                                 v-bind:value="team.iata">
                                             {{team.name}}
@@ -121,7 +121,7 @@
                                     <select id="westTeams" name="team" v-on:click="updateImage('westTeams')"
                                             class="form-control"
                                             v-model="team" required>
-                                        <option value="">¿Que equipo te gustaria ver?</option>
+                                        <option value="">¿Qué equipo te gustaría ver?</option>
                                         <option class="teamName" v-for="team in westTeams"
                                                 v-bind:value="team.iata">
                                             {{team.name}}
@@ -166,7 +166,7 @@
                             <label>Nº Pasajeros</label>
                             <br>
                             <select id="passengerNumber" name="passengers" v-model="passengers" class="form-control" required>
-                                <option value="" selected>¿Cuantos sereis?</option>
+                                <option value="" selected>¿Cuántos seréis?</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
