@@ -14,7 +14,7 @@ new Vue({
             {name: 'Los Angeles Lakers', iata: 'LAX', logo: './images/teams/west/lakers.png'},
             {name: 'Oklahoma City Thunder', iata: 'OKC', logo: './images/teams/west/okc.png'},
             {name: 'San Antonio Spurs', iata: 'SAT', logo: './images/teams/west/spurs.png'},
-            {name: 'Los Angeles Clippers', iata: 'LAX', logo: './images/teams/west/clipers.png'},
+            {name: 'Los Angeles Clippers', iata: 'ONT', logo: './images/teams/west/clipers.png'},
             {name: 'Houston Rockets', iata: 'IAH', logo: './images/teams/west/rockets.png'},
             {name: 'Portland Trail Blazers', iata: 'PDX', logo: './images/teams/west/portland.png'},
             {name: 'Dallas Mavericks', iata: 'DFW', logo: './images/teams/west/dallas.png'},
