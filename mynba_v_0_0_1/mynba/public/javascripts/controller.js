@@ -104,6 +104,7 @@ new Vue({
 
 $(function () {
     $('#datetimepicker1').datetimepicker({
+        minDate: moment(),
         format: 'YYYY-MM-DD',
         locale: 'es'
     });
@@ -115,6 +116,7 @@ $(function () {
     });
 
     $("#datetimepicker1").on("dp.change", function (e) {
+        console.log(e.date);
         $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
     });
 
