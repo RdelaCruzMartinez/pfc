@@ -31,7 +31,8 @@ router.post('/submmit', function (req, res) {
     console.log("req.body.fecFin => " + req.body.fecFin);
 
     var json = buildJsonRequest(req);
-    var team = req.body.team;
+    var team = req.body.team,
+        passengersNum = req.body.passengers;
 
     var options = {
         method: 'POST',
@@ -46,7 +47,7 @@ router.post('/submmit', function (req, res) {
         console.log("*****Paso 1 Parse response");
         response = JSON.parse(response);
         var jsonResponse = processData(response);
-        getTicketPrice(jsonResponse, buildFinalJson, sendResponse, team, res);
+        getTicketPrice(jsonResponse, buildFinalJson, sendResponse, team, passengersNum, res);
     }).catch(function (err) {
         console.log(err);
         res.writeHead(500);
@@ -114,20 +115,20 @@ function processData(json) {
 
 }
 
-function getTicketPrice(jsonResponse, buildFinalJson, sendResponse, team, res) {
+function getTicketPrice(jsonResponse, buildFinalJson, sendResponse, team, passengersNum, res) {
     console.log("*****Paso 3 getTicketPrice()");
     var ticketPrice = "";
     mongo.connect(dbConnection, function (err, db) {
-        console.log("ABRE CONEXION A BD");
+        console.log("ABRIENDO CONEXION A BD");
         assert.equal(null, err);
         var cursor = db.collection('tickets').find();
         cursor.forEach(function (data, err) {
             assert.equal(null, err);
             if (data.team == team) {
-                ticketPrice = data.price;
+                ticketPrice = data.price * passengersNum;
             }
         }, function () {
-            console.log("CIERRA CONEXION A BD");
+            console.log("CERRANDO CONEXION A BD");
             db.close();
             buildFinalJson(jsonResponse, ticketPrice, sendResponse, res);
         });

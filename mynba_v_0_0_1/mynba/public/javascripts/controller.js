@@ -80,36 +80,27 @@ new Vue({
                 passengers = this.passengers,
                 fecIni = $('#fecIni').val(),
                 fecFin = $('#fecFin').val();
-            console.log("Capturando valores");
-            console.log("team = " + team);
-            console.log("origin = " + origin);
-            console.log("passengers = " + passengers);
-            console.log("fecIni = " + fecIni);
-            console.log("fecFin = " + fecFin);
             this.requestedFlight = false;
             this.loading = true; //se pone a true
-            this.$http.post('/submmit', {team: team, origin: origin, passengers: passengers, fecIni: fecIni, fecFin: fecFin})
+            this.$http.post('/submmit', {
+                team: team,
+                origin: origin,
+                passengers: passengers,
+                fecIni: fecIni,
+                fecFin: fecFin
+            })
                 .then(function (response) {
                     this.flightInformation = response.body;
-                    console.log(JSON.stringify(this.flightInformation));
                     this.totalDepartureStopOvers = this.flightInformation.departureStopOvers.length - 1;
-
                     this.loading = false;
                     this.requestedFlight = true;
                 }, function (error) {
                     this.loading = false;
                     alert("Lo semtimos mucho, ha habido un error procesando su búsqueda :(");
-                    console.log(error);
                 });
-        },
-        test: function () {
-            console.log("this.departureStopOvers => " + this.totalDepartureStopOvers);
-            this.requestedFlight = !this.requestedFlight;
         }
     }
 });
-
-//requestedFlight
 
 $(function () {
     $('#datetimepicker1').datetimepicker({

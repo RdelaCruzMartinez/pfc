@@ -5,8 +5,8 @@
     <!--Bootstrap mobile first -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Calcula cuanto te costaría ir a ver la NBA">
+    <meta name="author" content="Ramón de la Cruz">
 
     <title>MyNBA</title>
     <!-- Bootstrap Latest compiled and minified CSS -->
@@ -88,7 +88,7 @@
         </div>
     </div>
 
-    <div id="teamChoicePanel" class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-md-offset-3">
         <div class="panel panel-default">
             <div class="panel-body">
                 <form id="teamForm" name="teamForm" action="/submmit" method="post" v-on:submit.prevent="submitForm">
@@ -97,7 +97,7 @@
                             <div class="col-dm-6">
                                 <label>Conferencia:</label>
                                 <br>
-                                <select name="selectConference" id="selectConference" v-model="conference"
+                                <select v-model="conference"
                                         class="form-control" required>
                                     <option value="">Selecciona una conferencia</option>
                                     <option value="east">Este</option>
@@ -107,7 +107,7 @@
                             <div id="teamSelect" class="col-sm-8">
                                 <label>Selecciona un equipo:</label>
                                 <div v-if="conference === 'east'">
-                                    <select id="eastTeams" name="team" v-on:click="updateImage('eastTeams')"
+                                    <select id="eastTeams" v-on:click="updateImage('eastTeams')"
                                             class="form-control"
                                             v-model="team" required>
                                         <option value="">¿Qué equipo te gustaría ver?</option>
@@ -118,7 +118,7 @@
                                     </select>
                                 </div>
                                 <div v-if="conference === 'west'">
-                                    <select id="westTeams" name="team" v-on:click="updateImage('westTeams')"
+                                    <select id="westTeams"  v-on:click="updateImage('westTeams')"
                                             class="form-control"
                                             v-model="team" required>
                                         <option value="">¿Qué equipo te gustaría ver?</option>
@@ -143,7 +143,7 @@
                         <div id="originSelect" class="col-sm-4">
                             <label>Origen:</label>
                             <br>
-                            <select name="origin" v-model="origin" class="form-control" required>
+                            <select  v-model="origin" class="form-control" required>
                                 <option value="" selected>¿Desde donde viajarás?</option>
                                 <option value="BCN">Barcelona</option>
                                 <option value="BIO">Bilbao</option>
@@ -158,14 +158,13 @@
                                 <option value="SCQ">Santiago de Compostela</option>
                                 <option value="SVQ">Sevilla</option>
                                 <option value="VLC">Valencia</option>
-                                <option value="VLL">Valladolid</option>
-                                <option value="ZAZ">Zaragoza</option>
                             </select>
                         </div>
                         <div class="col-sm-4">
                             <label>Nº Pasajeros</label>
                             <br>
-                            <select id="passengerNumber" name="passengers" v-model="passengers" class="form-control" required>
+                            <select name="passengers" v-model="passengers" class="form-control"
+                                    required>
                                 <option value="" selected>¿Cuántos seréis?</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -181,7 +180,7 @@
                             <br/>
                             <div class="form-group">
                                 <div class='input-group date' id='datetimepicker1'>
-                                    <input id="fecIni" name="fecIni" type='text' class="form-control" required/>
+                                    <input id="fecIni" type='text' class="form-control" required/>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
@@ -192,7 +191,7 @@
                             <label>Fecha de vuelta:</label>
                             <br/>
                             <div class='input-group date' id='datetimepicker2'>
-                                <input id="fecFin" name="fecFin" type='text' class="form-control" required/>
+                                <input id="fecFin" type='text' class="form-control" required/>
                                 <span class="input-group-addon">
                                     <span class="glyphicon glyphicon-calendar"></span>
                                 </span>
@@ -204,7 +203,6 @@
                             <button type="submit" class="btn btn-primary">Enviar</button>
                             <!--v-on:click="findFligthsProcess"-->
                             <button type="reset" class="btn btn-primary" v-on:click="clear">Limpiar</button>
-                            <button type="reset" class="btn btn-danger" v-on:click="test">Debug</button>
                         </div>
                     </div>
                 </form>
@@ -219,7 +217,7 @@
                     <div v-if="loading" class="col-sm-12">
                         <img id="loadingGif" src="images/loading2.gif" class="img-responsive">
                     </div>
-                    <div id="flight" class="row" v-if="requestedFlight">
+                    <div class="row" v-if="requestedFlight">
                         <h3 class="text-center">Vuelo de {{flightInformation.departureStopOvers[0].origin}} a
                             {{flightInformation.departureStopOvers[totalDepartureStopOvers].destination}}</h3>
                         <img src="images/plane.png" class="responsive-image">
@@ -258,6 +256,42 @@
                                 </tbody>
                             </table>
                         </div>
+                        <h3 class="text-center">Costes totales:</h3>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                <th><h4>Vuelo</h4></th>
+                                <th><h4>Entradas</h4></th>
+                                <th><h4>Total</h4></th>
+                                </thead>
+                                <tbody>
+                                <td><h4>{{flightInformation.fligthCost}}€</h4></td>
+                                <td><h4>{{flightInformation.ticketCost}}€</h4></td>
+                                <td><h4>{{flightInformation.totalCost}}€</h4></td>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div id="about" class="col-md-6 col-md-offset-3">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <h4>About</h4>
+                        <p>Versión alfa de <a href="https://github.com/RdelaCruzMartinez/pfc" target="_blank">MyNBA</a>, un
+                            proyecto final de curso para el grado superior <a
+                                    href="http://fp-dual.es/index.html?network=g&keyword=%2Bfp%20%2Bdual&device=c&placement=&target=" target="_blank">dual</a>
+                            de desarrollo de aplicaciones web en
+                            el <a href="http://www.iesfbmoll.org/" target="_blank">IES Francesc de Borja Moll</a>, el objetivo del
+                            proyecto era crear un estimador de
+                            precios para personas interesadas en viajar a EE.UU desde España para ver un partido de
+                            la NBA.</p>
+                        <p>mail de contacto: mynbapm@gmail.com.</p>
                     </div>
                 </div>
             </div>
