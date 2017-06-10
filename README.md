@@ -13,6 +13,7 @@ Este proyecto ha sido realizado en el plazo de un mes para como prueba final del
 ### Back
 
 - Node.js con Express y npm para la gestión de librerías.
+- Base de datos con MongoDB
 
 ## Proceso de instalación
 
@@ -22,4 +23,6 @@ Este proyecto ha sido realizado en el plazo de un mes para como prueba final del
 
 3. ir a la carpeta del proyecto y ejecutar npm install
 
-4. Ejecutar -> node ./bin/www 
+4. Ejecutar en la terminal -> node ./bin/www 
+
+Al utilizar una BD para los tickets, habría que simularla o proporcionar una alternativa.
