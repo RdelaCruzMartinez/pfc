@@ -1,6 +1,6 @@
 # Proyecto final de Curso de Desarrollo de aplicaciones Web DUAL
 
-Este proyecto ha sido realizado en el plazo de un mes para como prueba final del curso, consiste en una aplicación web encargada de estimar los costes de un viaje a ver un partido de la NBA
+Este proyecto ha sido realizado en el plazo de un mes como prueba final del curso, consiste en una aplicación web encargada de estimar los costes de un viaje a EE.UU desde españa para ver un partido de la NBA
 
 ## Tecnologías utilizadas
 
