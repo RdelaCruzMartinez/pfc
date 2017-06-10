@@ -125,7 +125,9 @@ function getTicketPrice(jsonResponse, buildFinalJson, sendResponse, team, passen
         cursor.forEach(function (data, err) {
             assert.equal(null, err);
             if (data.team == team) {
-                ticketPrice = data.price * passengersNum;
+                ticketPrice = (data.price * passengersNum).toFixed(2);
+                console.log("ticketprice => " + ticketPrice);
+
             }
         }, function () {
             console.log("CERRANDO CONEXION A BD");
@@ -142,7 +144,7 @@ function buildFinalJson(processedData, ticketPrice, sendResponse, res) {
     var finalJson = {
         fligthCost: processedData.saleTotal.slice(3, 50),
         ticketCost: ticketPrice,
-        totalCost: (parseFloat(processedData.saleTotal.slice(3, 50)) + ticketPrice).toFixed(2),
+        totalCost: parseFloat(processedData.saleTotal.slice(3, 50)) + parseFloat(ticketPrice),
         departureStopOvers: [],
         arrivalStopOvers: []
     };
