@@ -6,6 +6,7 @@ new Vue({
         origin: '',
         passengers: '',
         loading: false,
+        error: false,
         requestedFlight: false,
         totalDepartureStopOvers: 0,
         flightInformation: {},
@@ -81,7 +82,8 @@ new Vue({
                 fecIni = $('#fecIni').val(),
                 fecFin = $('#fecFin').val();
             this.requestedFlight = false;
-            this.loading = true; //se pone a true
+            this.loading = true;
+            this.error = false;
             this.$http.post('/submmit', {
                 team: team,
                 origin: origin,
@@ -96,7 +98,7 @@ new Vue({
                     this.requestedFlight = true;
                 }, function (error) {
                     this.loading = false;
-                    alert("Lo semtimos mucho, ha habido un error procesando su búsqueda :(");
+                    this.error = true;
                 });
         }
     }

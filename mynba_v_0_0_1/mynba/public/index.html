@@ -217,6 +217,9 @@
                     <div v-if="loading" class="col-sm-12">
                         <img id="loadingGif" src="images/loading2.gif" class="img-responsive">
                     </div>
+                    <div  v-if="error">
+                        <h4 class="text-center">Lo sentimos mucho, ha habido un error procesando su búsqueda :( </h4>
+                    </div>
                     <div class="row" v-if="requestedFlight">
                         <h3 class="text-center">Vuelo de {{flightInformation.departureStopOvers[0].origin}} a
                             {{flightInformation.departureStopOvers[totalDepartureStopOvers].destination}}</h3>

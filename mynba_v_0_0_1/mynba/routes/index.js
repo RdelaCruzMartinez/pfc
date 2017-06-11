@@ -126,8 +126,6 @@ function getTicketPrice(jsonResponse, buildFinalJson, sendResponse, team, passen
             assert.equal(null, err);
             if (data.team == team) {
                 ticketPrice = (data.price * passengersNum).toFixed(2);
-                console.log("ticketprice => " + ticketPrice);
-
             }
         }, function () {
             console.log("CERRANDO CONEXION A BD");
