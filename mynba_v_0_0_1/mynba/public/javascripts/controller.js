@@ -118,7 +118,6 @@ $(function () {
     });
 
     $("#datetimepicker1").on("dp.change", function (e) {
-        console.log(e.date);
         $('#datetimepicker2').data("DateTimePicker").minDate(e.date);
     });
 
